@@ -9,7 +9,7 @@ from .helpers import *
 from django.contrib.auth import login #authenticate
 from rest_framework import status
 from django.db.models import Q
-
+from rest_framework import viewsets
 
 def authenticate(username=None, password=None,):
     try:
@@ -28,17 +28,18 @@ def authenticate(username=None, password=None,):
 class  RegisterView(APIView):
     def post(self,request):
         print('i am here 30')
+        print(request.data)
         try:
             serializer=UserSerializer(data=request.data)
             if not serializer.is_valid():
-                print(16)
+                print(serializer.errors)
                 return JsonResponse(
                     {
                         'status':403,
                         'errors':serializer.errors
                     }
                 )
-            print(16)
+            print('OK')
             serializer.save()
             return JsonResponse(
                     {
@@ -60,6 +61,7 @@ class LoginView(APIView):
     def get(self , request):
         if request.user.is_authenticated:
             userserializer=UserSerializer(request.user)
+            print(userserializer.data['id'],12)
             return JsonResponse({'status':True,'user_data':userserializer.data})
         return JsonResponse({'status':False})
 
@@ -68,8 +70,6 @@ class LoginView(APIView):
         print(data)
         username = data.get('username', None)
         password = data.get('password', None)
-        print(username)
-        print(password)
         user = authenticate(username=username, password=password)
         print(user,16)
         if user is not None:
@@ -77,6 +77,7 @@ class LoginView(APIView):
                 login(request, user)
                 userserializer=UserSerializer(user)
                 print(userserializer.data)
+
                 return JsonResponse({'status':True,'user_data':userserializer.data})
             else:
                 return JsonResponse({
@@ -97,8 +98,6 @@ class VerifyOtp(APIView):
             print(data)
             user_obj=User.objects.get(phone=data.get('phone'))
             otp=data.get('otp')
-            print(otp)
-
             if user_obj.otp == otp:
                 user_obj.is_phone_varified=True
                 user_obj.save()
@@ -142,13 +141,13 @@ class VerifyOtp(APIView):
 
 
 
+
+
+
 class educationdetail(APIView):
-    print(123)
     def get(self,request):
         educationdetaildata=Education_detail.objects.all()
-        print(educationdetaildata)
         educationdetaildata=Education_detailSerializer(educationdetaildata,many=True)
-        print(educationdetaildata)
         return JsonResponse(
                     {
                         'status':200,
@@ -158,9 +157,9 @@ class educationdetail(APIView):
                 )
 
     def post(self,request):
+        print(request.user)
         data=request.data
         print(data)
-        print(request.user)
         data['user']=request.user.id
         try:
             serializer=Education_detailSerializer(data=data)
@@ -193,4 +192,4 @@ class educationdetail(APIView):
             )
     
 class skill(APIView):
-    pass             
+    pass 

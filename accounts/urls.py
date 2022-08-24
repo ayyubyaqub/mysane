@@ -1,6 +1,12 @@
 from django.urls import path
 from .views import *
 
+from rest_framework.routers import DefaultRouter
+
+# router = DefaultRouter()
+# router.register('education_details', educationdetail, basename='educationdetail')
+# urlpatterns1 = router.urls
+
 urlpatterns=[
     path('register/',RegisterView.as_view()),
     path('verify-otp/',VerifyOtp.as_view()),

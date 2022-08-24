@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
@@ -43,9 +44,6 @@ def send_email_token(sender ,instance , created ,**kwargs):
             print(e)
 
 
-
-
-
 class Education_detail(models.Model):
     user =models.ForeignKey(User,on_delete=models.CASCADE,related_name='education_details',null=True,blank=True)
     school_name=models.CharField(max_length=100,null=True,blank=True)
@@ -65,4 +63,4 @@ class professional_basic(models.Model):
 
 class Skill(models.Model):
     skill=models.CharField(max_length=255,null=True,blank=True)
-    user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='skill')            
+    user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='skill')
