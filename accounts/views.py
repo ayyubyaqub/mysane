@@ -139,11 +139,6 @@ class VerifyOtp(APIView):
             print(e)
 
 
-
-
-
-
-
 class educationdetail(APIView):
     def get(self,request):
         educationdetaildata=Education_detail.objects.all()
@@ -160,7 +155,7 @@ class educationdetail(APIView):
         print(request.user)
         data=request.data
         print(data)
-        data['user']=request.user.id
+    
         try:
             serializer=Education_detailSerializer(data=data)
             if not serializer.is_valid():
@@ -191,5 +186,42 @@ class educationdetail(APIView):
                 }
             )
     
+
+    def delete(self, request):
+        print('i')
+        data=request.data
+        print(data)
+        id=int(data['id'])   
+        edu_detail=Education_detail.objects.get(id=id)
+        print(edu_detail)
+        edu_detail.delete()
+        return JsonResponse(
+                    {
+                        'status':200,
+                        'data':'congratulations you are in delete'
+                        
+                    }
+                )
+
+    def put(self, request, pk, format=None):
+        print('hi i am in 212')
+        print(pk,213)
+        educationdetail = Education_detail.objects.get(id=pk)
+        print(educationdetail)
+        print(request.data)
+        data={'school_name':'abcd'}
+        try:
+            serializer = Education_detailSerializer(educationdetail, data=data)
+
+        except Exception as e:  
+            print(e)
+            pass
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse({'status':True,'user_data':serializer.data})
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
 class skill(APIView):
     pass 

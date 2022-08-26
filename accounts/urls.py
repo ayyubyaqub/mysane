@@ -12,4 +12,5 @@ urlpatterns=[
     path('verify-otp/',VerifyOtp.as_view()),
     path('Login/',LoginView.as_view()),
     path('education_details/',educationdetail.as_view()),
+    path('education_details/<int:pk>',educationdetail.as_view()),
 ]
