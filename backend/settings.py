@@ -97,6 +97,7 @@ DATABASES = {
 #         'NAME': 'sane_database',
 #         'USER': 'postgres',
 #         'PASSWORD': 'shivamrajayyub',
+#         'PASSWORD': 'password123',
 #         'HOST': 'saneobserverdb.cbzl07gxnei8.ap-south-1.rds.amazonaws.com',
 #         'PORT': '5432',
 #     }
