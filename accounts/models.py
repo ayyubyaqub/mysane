@@ -60,7 +60,7 @@ class professional_basic(models.Model):
     pass
 
 class Skill(models.Model):
-    user=models.ManyToManyField(User,related_name='skill')
+    user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='skill')
     skill=models.CharField(max_length=255,null=True,blank=True)
 
 

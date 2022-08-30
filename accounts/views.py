@@ -285,15 +285,14 @@ class skill(APIView):
             )
     
 
-    def delete(self, request):
-        data=request.data
-        id=int(data['id'])   
-        edu_detail=Education_detail.objects.get(id=id)
-        edu_detail.delete()
+    def delete(self, request,pk):
+        print(pk)   
+        skill=Skill.objects.get(id=pk)
+        skill.delete()
         return JsonResponse(
                     {
                         'status':200,
-                        'data':' your skill is deleted'
+                        'data':' your project detail is deleted'
                         
                     }
                 )
@@ -428,7 +427,6 @@ class user_project_view(APIView):
 
     def post(self,request):
         data=request.data
-        print(data)
     
         try:
             serializer=User_projectSerializer(data=data)
@@ -448,8 +446,7 @@ class user_project_view(APIView):
                         'msg':'Your project detail is saved'
                      }
                 )
-        except Exception as e :
-            print(e,179)    
+        except Exception as e : 
             return JsonResponse(
                 {
                     'status':404,
@@ -460,12 +457,12 @@ class user_project_view(APIView):
 
     def delete(self, request,pk):
         print(pk)   
-        prof_detail=user_project.objects.get(id=pk)
-        prof_detail.delete()
+        userproject=user_project.objects.get(id=pk)
+        userproject.delete()
         return JsonResponse(
                     {
                         'status':200,
-                        'data':' your professional detail is deleted'
+                        'data':' your project detail is deleted'
                         
                     }
                 )
