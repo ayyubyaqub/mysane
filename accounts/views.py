@@ -10,7 +10,6 @@ from django.contrib.auth import login #authenticate
 from rest_framework import status
 from django.db.models import Q
 from rest_framework import viewsets
-
 def authenticate(username=None, password=None,):
     try:
         user = User.objects.get(
@@ -396,7 +395,6 @@ class professional_Detail(APIView):
             serializer.save()
             return JsonResponse({'status':True,'updated_skill':serializer.data})
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)         
-
 
 
 
