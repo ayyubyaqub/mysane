@@ -31,11 +31,11 @@ class  RegisterView(APIView):
         try:
             serializer=UserSerializer(data=request.data)
             if not serializer.is_valid():
-                print(serializer.errors)
+                print(serializer.errors,34)
                 return JsonResponse(
                     {
                         'status':403,
-                        'errors':serializer.errors
+                        'error':str(serializer.errors)
                     }
                 )
             print('OK')
