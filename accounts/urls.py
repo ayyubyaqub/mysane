@@ -19,4 +19,12 @@ urlpatterns=[
     path('professional_Detail/<int:pk>',professional_Detail.as_view()),
     path('user_project/',user_project_view.as_view()),
     path('user_project/<int:pk>',user_project_view.as_view()),
+    path('user_leadership/',user_leadership_view.as_view()),
+    path('user_leadership/<int:pk>',user_leadership_view.as_view()),
+    path('user_volunteership/',user_volunteership_view.as_view()),
+    path('user_volunteership/<int:pk>',user_volunteership_view.as_view()),
+    path('user_fellowship/',user_fellowship_view.as_view()),
+    path('user_fellowship/<int:pk>',user_fellowship_view.as_view()),
+    path('user_career/',user_career_view.as_view()),
+    path('user_career/<int:pk>',user_career_view.as_view()),
 ]

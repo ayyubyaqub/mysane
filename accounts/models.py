@@ -17,6 +17,7 @@ class User(AbstractUser):
     email=models.EmailField(unique=True)
     phone=models.CharField(max_length=14,unique=True)
     gender=models.CharField(max_length=50,null=True,blank=True)
+    dob=models.DateField(null=True,blank=True)
     is_email_varified=models.BooleanField(default=False)
     is_phone_varified=models.BooleanField(default=False)
     otp=models.CharField(max_length=6,null=True,blank=True)
@@ -80,3 +81,36 @@ class user_project(models.Model):
     project_title=models.CharField(max_length=255,null=True,blank=True)
     project_desc=models.TextField()
     project_link=models.TextField()
+
+
+
+class user_leadership(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='leadership')
+    leadership_title=models.CharField(max_length=255,null=True,blank=True)
+    leadership_desc=models.TextField()
+    leadership_date=models.DateField()
+
+
+
+class user_volunteership(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='volunteership')
+    volunteer_title=models.CharField(max_length=255,null=True,blank=True)
+    volunteer_desc=models.TextField()
+    volunteer_date=models.DateField()
+
+class user_fellowship(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='fellowship')
+    fellowship_title=models.CharField(max_length=255,null=True,blank=True)
+    fellowship_desc=models.TextField()
+    fellowship_date=models.DateField()
+
+
+class user_career(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='career')
+    title=models.CharField(max_length=255,null=True,blank=True)    
+    emp_type=models.CharField(max_length=255,null=True,blank=True)
+    company_name=models.CharField(max_length=255,null=True,blank=True)
+    location=models.CharField(max_length=100,null=True,blank=True)
+    start_date=models.DateField(null=True,blank=True)
+    end_date=models.DateField(null=True,blank=True)
+    description=models.TextField(null=True,blank=True)

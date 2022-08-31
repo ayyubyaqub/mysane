@@ -6,10 +6,10 @@ from .models import *
 class   UserSerializer(serializers.ModelSerializer):
     class Meta:
         model=User
-        fields=['id','email','password','phone','first_name','last_name','gender']
+        fields=['id','email','password','phone','first_name','last_name','gender','dob']
         extra_kwargs = {'password': {'write_only': True},'id':{'read_only':True}}
     def create(self, validated_data):
-        user=User.objects.create(email=validated_data['email'], phone=validated_data['phone'],first_name=validated_data['first_name'], last_name=validated_data['last_name'], gender=validated_data['gender'],)
+        user=User.objects.create(email=validated_data['email'], phone=validated_data['phone'],first_name=validated_data['first_name'], last_name=validated_data['last_name'], gender=validated_data['gender'],dob=validated_data['dob'])
         user.set_password(validated_data['password'])
         user.save()
         send_otp_mobile(user.phone,user)
@@ -102,5 +102,85 @@ class User_projectSerializer(serializers.ModelSerializer):
        
         return instance  
 
+
+
+class User_leadershipSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=user_leadership
+        fields=['id','user','leadership_title','leadership_desc','leadership_date']
+        extra_kwargs = {'id':{'read_only':True}}
+
+    def create(self, validated_data):
+        skill=user_leadership.objects.create(user=validated_data['user'], leadership_title=validated_data['leadership_title'],leadership_desc=validated_data['leadership_desc'],leadership_date=validated_data['leadership_date'],)
+        skill.save()
+        return skill
+
+    def update(self, instance, validated_data):
+        instance.project_title=validated_data.get('leadership_title',instance.leadership_title)
+        instance.project_desc=validated_data.get('leadership_desc',instance.leadership_desc)
+        instance.project_link=validated_data.get('leadership_date',instance.leadership_date)
+       
+        return instance  
+
+
+
+
+class user_volunteershipSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=user_volunteership
+        fields=['id','user','volunteer_title','volunteer_desc','volunteer_date']
+        extra_kwargs = {'id':{'read_only':True}}
+
+    def create(self, validated_data):
+        skill=user_volunteership.objects.create(user=validated_data['user'], volunteer_title=validated_data['volunteer_title'],volunteer_desc=validated_data['volunteer_desc'],volunteer_date=validated_data['volunteer_date'],)
+        skill.save()
+        return skill
+
+    def update(self, instance, validated_data):
+        instance.volunteer_title=validated_data.get('volunteer_title',instance.volunteer_title)
+        instance.volunteer_desc=validated_data.get('volunteer_desc',instance.volunteer_desc)
+        instance.volunteer_date=validated_data.get('volunteer_date',instance.volunteer_date)
+       
+        return instance 
+
+
+class user_fellowshipshipSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=user_fellowship
+        fields=['id','user','fellowship_title','fellowship_desc','fellowship_date']
+        extra_kwargs = {'id':{'read_only':True}}
+
+    def create(self, validated_data):
+        userfellowship=user_fellowship.objects.create(user=validated_data['user'], fellowship_title=validated_data['fellowship_title'],fellowship_desc=validated_data['fellowship_desc'],fellowship_date=validated_data['fellowship_date'],)
+        userfellowship.save()
+        return userfellowship
+
+    def update(self, instance, validated_data):
+        instance.fellowship_title=validated_data.get('fellowship_title',instance.fellowship_title)
+        instance.fellowship_desc=validated_data.get('fellowship_desc',instance.fellowship_desc)
+        instance.fellowship_date=validated_data.get('fellowship_date',instance.fellowship_date)
+        return instance 
+
+
+class CareerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=user_career
+        fields=['id','user','title','emp_type','company_name','location','start_date','end_date','description']
+        extra_kwargs = {'id':{'read_only':True}}
+
+    def create(self, validated_data):
+        usercareer=user_career.objects.create(user=validated_data['user'], emp_type=validated_data['emp_type'],company_name=validated_data['company_name'],location=validated_data['location'],start_date=validated_data['start_date'],end_date=validated_data['end_date'],description=validated_data['description'])
+        usercareer.save()
+        return usercareer
+
+    def update(self, instance, validated_data):
+        instance.emp_type=validated_data.get('emp_type',instance.emp_type)
+        instance.company_name=validated_data.get('company_name',instance.company_name)
+        instance.location=validated_data.get('location',instance.location)
+        # instance.is_currently_working=validated_data.get('is_currently_working',instance.is_currently_working)
+        instance.start_date=validated_data.get('start_date',instance.start_date)
+        instance.end_date=validated_data.get('end_date',instance.end_date)
+        instance.description=validated_data.get('description',instance.description)
+        return instance 
 
 

@@ -477,3 +477,338 @@ class user_project_view(APIView):
             serializer.save()
             return JsonResponse({'status':True,'updated_skill':serializer.data})
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)                 
+
+
+
+class user_leadership_view(APIView):
+    def get(self,request,pk=None):
+        print(406)
+        if pk != None:
+            print(pk,408)
+            userleadership=user_leadership.objects.filter(user__id=pk)
+            userleadershipdata=User_leadershipSerializer(userleadership,many=True)
+            return JsonResponse(
+                    {
+                        'status':200,
+                        'data':userleadershipdata.data
+                        
+                    }
+                )
+        
+        userleadership=user_leadership.objects.all()
+        userleadershipdata=User_leadershipSerializer(userleadership,many=True)
+        return JsonResponse(
+                    {
+                        'status':200,
+                        'data':userleadershipdata.data
+                        
+                    }
+                )
+
+    def post(self,request):
+        data=request.data
+        print(data)
+        try:
+            serializer=User_leadershipSerializer(data=data)
+            if not serializer.is_valid():
+                print(serializer.errors)
+                return JsonResponse(
+                    {
+                        'status':403,
+                        'errors':serializer.errors
+                        
+                    }
+                )
+            resp=serializer.save()
+            return JsonResponse(
+                    {
+                        'status':200, 
+                        'msg':'Your leadership detail is saved'
+                     }
+                )
+        except Exception as e : 
+            return JsonResponse(
+                {
+                    'status':404,
+                    'error':'something went wrong'
+                }
+            )
+    
+
+    def delete(self, request,pk):
+        print(pk)   
+        userleadership=user_leadership.objects.get(id=pk)
+        userleadership.delete()
+        return JsonResponse(
+                    {
+                        'status':200,
+                        'data':' your leadership detail is deleted'
+                        
+                    }
+                )
+
+    def put(self, request, pk, format=None):
+        userleadership = user_leadership.objects.get(id=pk)
+        try:
+            serializer = User_leadershipSerializer(userleadership, data=request.data)
+
+        except Exception as e:  
+            print(e)
+            pass
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse({'status':True,'updated_leadership':serializer.data})
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)                 
+
+
+
+
+class user_volunteership_view(APIView):
+    def get(self,request,pk=None):
+        print(406)
+        if pk != None:
+            print(pk,408)
+            uservolunteership=user_volunteership.objects.filter(user__id=pk)
+            uservolunteershipdata=user_volunteershipSerializer(uservolunteership,many=True)
+            return JsonResponse(
+                    {
+                        'status':200,
+                        'data':uservolunteershipdata.data
+                        
+                    }
+                )
+        
+        uservolunteership=user_volunteership.objects.all()
+        uservolunteershipdata=user_volunteershipSerializer(uservolunteership,many=True)
+        return JsonResponse(
+                    {
+                        'status':200,
+                        'data':uservolunteershipdata.data
+                        
+                    }
+                )
+
+    def post(self,request):
+        data=request.data
+        print(data)
+        try:
+            serializer=user_volunteershipSerializer(data=data)
+            if not serializer.is_valid():
+                print(serializer.errors)
+                return JsonResponse(
+                    {
+                        'status':403,
+                        'errors':serializer.errors
+                        
+                    }
+                )
+            resp=serializer.save()
+            return JsonResponse(
+                    {
+                        'status':200, 
+                        'msg':'Your volunteership detail is saved'
+                     }
+                )
+        except Exception as e : 
+            return JsonResponse(
+                {
+                    'status':404,
+                    'error':'something went wrong'
+                }
+            )
+    
+
+    def delete(self, request,pk):
+        print(pk)   
+        uservolunteership=user_volunteership.objects.get(id=pk)
+        uservolunteership.delete()
+        return JsonResponse(
+                    {
+                        'status':200,
+                        'data':' your volunteership detail is deleted'
+                        
+                    }
+                )
+
+    def put(self, request, pk, format=None):
+        uservolunteership = user_volunteership.objects.get(id=pk)
+        try:
+            serializer = user_volunteershipSerializer(uservolunteership, data=request.data)
+
+        except Exception as e:  
+            print(e)
+            pass
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse({'status':True,'updated_leadership':serializer.data})
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)                 
+
+
+
+
+
+class user_fellowship_view(APIView):
+    def get(self,request,pk=None):
+        print(406)
+        if pk != None:
+            print(pk,408)
+            userfellowship=user_fellowship.objects.filter(user__id=pk)
+            userfellowshipdata=user_fellowshipshipSerializer(userfellowship,many=True)
+            return JsonResponse(
+                    {
+                        'status':200,
+                        'data':userfellowshipdata.data
+                        
+                    }
+                )
+        
+        userfellowship=user_fellowship.objects.all()
+        userfellowshipdata=user_fellowshipshipSerializer(userfellowship,many=True)
+        return JsonResponse(
+                    {
+                        'status':200,
+                        'data':userfellowshipdata.data
+                        
+                    }
+                )
+
+    def post(self,request):
+        data=request.data
+        print(data)
+        try:
+            serializer=user_fellowshipshipSerializer(data=data)
+            if not serializer.is_valid():
+                print(serializer.errors)
+                return JsonResponse(
+                    {
+                        'status':403,
+                        'errors':serializer.errors
+                        
+                    }
+                )
+            resp=serializer.save()
+            return JsonResponse(
+                    {
+                        'status':200, 
+                        'msg':'Your volunteership detail is saved'
+                     }
+                )
+        except Exception as e : 
+            return JsonResponse(
+                {
+                    'status':404,
+                    'error':'something went wrong'
+                }
+            )
+    
+
+    def delete(self, request,pk):
+        print(pk)   
+        obj=user_fellowship.objects.get(id=pk)
+        obj.delete()
+        return JsonResponse(
+                    {
+                        'status':200,
+                        'data':' your volunteership detail is deleted'
+                        
+                    }
+                )
+
+    def put(self, request, pk, format=None):
+        obj = user_fellowship.objects.get(id=pk)
+        try:
+            serializer = user_volunteershipSerializer(obj, data=request.data)
+
+        except Exception as e:  
+            print(e)
+            pass
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse({'status':True,'updated_leadership':serializer.data})
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)                 
+
+
+
+
+
+class user_career_view(APIView):
+    def get(self,request,pk=None):
+        if pk != None:
+            print(pk,737)
+            obj=user_career.objects.filter(user__id=pk)
+            print(obj)
+            obj_data=CareerSerializer(obj,many=True)
+            return JsonResponse(
+                    {
+                        'status':200,
+                        'data':obj_data.data
+                        
+                    }
+                )
+        
+        obj=user_career.objects.all()
+        obj_data=CareerSerializer(obj,many=True)
+        return JsonResponse(
+                    {
+                        'status':200,
+                        'data':obj_data.data
+                        
+                    }
+                )
+
+    def post(self,request):
+        data=request.data
+        print(data,761)
+        try:
+            serializer=CareerSerializer(data=data)
+            if not serializer.is_valid():
+                print(serializer.errors)
+                return JsonResponse(
+                    {
+                        'status':403,
+                        'errors':serializer.errors
+                        
+                    }
+                )
+            resp=serializer.save()
+            print(resp,774)
+            return JsonResponse(
+                    {
+                        'status':200, 
+                        'msg':'Your volunteership detail is saved'
+                     }
+                )
+        except Exception as e : 
+            print(e)
+            return JsonResponse(
+                {
+                    'status':404,
+                    'error':'something went wrong'
+                }
+            )
+    
+
+    def delete(self, request,pk):
+        print(pk)   
+        obj=user_career.objects.get(id=pk)
+        obj.delete()
+        return JsonResponse(
+                    {
+                        'status':200,
+                        'data':' your volunteership detail is deleted'
+                        
+                    }
+                )
+
+    def put(self, request, pk, format=None):
+        obj = user_career.objects.get(id=pk)
+        try:
+            serializer = CareerSerializer(obj, data=request.data)
+
+        except Exception as e:  
+            print(e)
+            pass
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse({'status':True,'updated_leadership':serializer.data})
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)                 
