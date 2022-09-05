@@ -27,4 +27,5 @@ urlpatterns=[
     path('user_fellowship/<int:pk>',user_fellowship_view.as_view()),
     path('user_career/',user_career_view.as_view()),
     path('user_career/<int:pk>',user_career_view.as_view()),
+    path('changepassword/',ChangePassword.as_view()),
 ]

@@ -546,6 +546,7 @@ class user_leadership_view(APIView):
                         
                     }
                 )
+                
 
     def put(self, request, pk, format=None):
         userleadership = user_leadership.objects.get(id=pk)
@@ -812,3 +813,29 @@ class user_career_view(APIView):
             serializer.save()
             return JsonResponse({'status':True,'updated_leadership':serializer.data})
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)                 
+
+
+    
+class ChangePassword(APIView):
+     def post(self, request):
+        try:
+            data=request.data
+            user_obj=User.objects.get(phone=data.get('phone'))
+            password1=data.get('password1')
+            password12=data.get('password2')
+            if password1 == password12:
+                user_obj.set_password(password1)
+                user_obj.save()
+                userserializer=UserSerializer(user_obj)
+                return JsonResponse({'status':True,'user_data':userserializer.data})
+            return JsonResponse({
+                    'status':403,
+                    'msg':'Please Enter Same Password'
+                })    
+
+        except Exception as e:
+            print(e)  
+        return  JsonResponse({
+                    'status':404,
+                    'error':'something went wrong'+str(e)
+                })          
