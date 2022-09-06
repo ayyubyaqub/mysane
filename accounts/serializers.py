@@ -177,7 +177,7 @@ class CareerSerializer(serializers.ModelSerializer):
         instance.emp_type=validated_data.get('emp_type',instance.emp_type)
         instance.company_name=validated_data.get('company_name',instance.company_name)
         instance.location=validated_data.get('location',instance.location)
-        # instance.is_currently_working=validated_data.get('is_currently_working',instance.is_currently_working)
+        instance.is_currently_working=validated_data.get('is_currently_working',instance.is_currently_working)
         instance.start_date=validated_data.get('start_date',instance.start_date)
         instance.end_date=validated_data.get('end_date',instance.end_date)
         instance.description=validated_data.get('description',instance.description)

@@ -763,7 +763,7 @@ class user_career_view(APIView):
         try:
             serializer=CareerSerializer(data=data)
             if not serializer.is_valid():
-                print(serializer.errors)
+                print(serializer.errors,766)
                 return JsonResponse(
                     {
                         'status':403,
@@ -776,11 +776,11 @@ class user_career_view(APIView):
             return JsonResponse(
                     {
                         'status':200, 
-                        'msg':'Your volunteership detail is saved'
+                        'msg':'Your Career detail is saved'
                      }
                 )
         except Exception as e : 
-            print(e)
+            print(e,783)
             return JsonResponse(
                 {
                     'status':404,

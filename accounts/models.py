@@ -115,4 +115,5 @@ class user_career(models.Model):
     location=models.CharField(max_length=100,null=True,blank=True)
     start_date=models.DateField(null=True,blank=True)
     end_date=models.DateField(null=True,blank=True)
+    is_currently_working=models.BooleanField(default=False)
     description=models.TextField(null=True,blank=True)
