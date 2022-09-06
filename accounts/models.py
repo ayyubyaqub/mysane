@@ -30,6 +30,8 @@ class User(AbstractUser):
     USERNAME_FIELD= 'email'
 
     REQUIRED_FIELDS=[]
+    def __str__(self):
+        return str(self.phone)+' '+str(self.email)
 
 @receiver(post_save,sender=User)
 def send_email_token(sender ,instance , created ,**kwargs):

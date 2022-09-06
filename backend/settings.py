@@ -94,10 +94,10 @@ DATABASES = {
 #     "default": {      
         
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'sane_db',
+#         'NAME': 'sanedatabase',
 #         'USER': 'postgres',
-#         'PASSWORD': 'saneobserver',
-#         'HOST': 'database-2.cbzl07gxnei8.ap-south-1.rds.amazonaws.com',
+#         'PASSWORD': 'sane123ayyub',
+#         'HOST': 'database-1.cbzl07gxnei8.ap-south-1.rds.amazonaws.com',
 #         'PORT': '5432',
 #     }
 # }
