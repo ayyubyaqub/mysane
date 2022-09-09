@@ -82,25 +82,35 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-
 DATABASES = {
-    "default": {      
-        
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sanedatabase',
-        'USER': 'postgres',
-        'PASSWORD': 'sane123ayyub',
-        'HOST': 'database-1.cbzl07gxnei8.ap-south-1.rds.amazonaws.com',
-        'PORT': '5432',
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+# DATABASES = {
+#     "default": {      
+#         # # this is from amosta account
+#         # 'ENGINE': 'django.db.backends.postgresql',
+#         # 'NAME': 'saneobserver',
+#         # 'USER': 'postgres',
+#         # 'PASSWORD': 'saneobserver123',
+#         # 'HOST': 'sane.c5cpc9jonh0k.us-east-1.rds.amazonaws.com',
+#         # 'PORT': '5432',
+
+
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'saneobserver',
+#         'USER': 'postgres',
+#         'PASSWORD': 'saneobserver123',
+#         'HOST': 'sane1.clzszf2cj8k8.us-east-1.rds.amazonaws.com',
+#         'PORT': '5432',
+    
+
+#     }
+# }
 
 
 

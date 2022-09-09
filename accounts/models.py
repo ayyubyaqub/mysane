@@ -17,6 +17,8 @@ class User(AbstractUser):
     email=models.EmailField(unique=True)
     phone=models.CharField(max_length=14,unique=True)
     gender=models.CharField(max_length=50,null=True,blank=True)
+    city=models.CharField(max_length=50,null=True,blank=True)
+    marital_status=models.CharField(max_length=50,null=True,blank=True)
     dob=models.DateField(null=True,blank=True)
     is_email_varified=models.BooleanField(default=False)
     is_phone_varified=models.BooleanField(default=False)
@@ -58,9 +60,18 @@ class Education_detail(models.Model):
     grades=models.CharField(max_length=100,null=True,blank=True)
     city=models.CharField(max_length=100,null=True,blank=True)
   
+class College_detail(models.Model):
+    user =models.ForeignKey(User,on_delete=models.CASCADE,related_name='college_details',null=True,blank=True)
+    college_name=models.CharField(max_length=100,null=True,blank=True)
+    degree=models.CharField(max_length=100,null=True,blank=True)
+    university=models.CharField(max_length=100,null=True,blank=True)
+    stream=models.CharField(max_length=100,null=True,blank=True)
+    From=models.DateField(null=True, blank=True)
+    to=models.DateField(null=True, blank=True)
+    grades=models.CharField(max_length=100,null=True,blank=True)
+    city=models.CharField(max_length=100,null=True,blank=True)
+  
 
-class professional_basic(models.Model):
-    pass
 
 class Skill(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='skill')
@@ -73,7 +84,6 @@ class professional_detail(models.Model):
     designation=models.CharField(max_length=255,null=True,blank=True)
     From=models.DateField(null=True, blank=True)
     to=models.DateField(null=True, blank=True)
-    is_currently_working=models.BooleanField(default=False)
     location=models.TextField(null=True,blank=True)
     work_responsibility=models.TextField(null=True,blank=True)
 
@@ -97,12 +107,14 @@ class user_leadership(models.Model):
 class user_volunteership(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='volunteership')
     volunteer_title=models.CharField(max_length=255,null=True,blank=True)
+    organisation_name=models.CharField(max_length=255,null=True,blank=True)
     volunteer_desc=models.TextField()
     volunteer_date=models.DateField()
 
 class user_fellowship(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='fellowship')
     fellowship_title=models.CharField(max_length=255,null=True,blank=True)
+    organisation_name=models.CharField(max_length=255,null=True,blank=True)
     fellowship_desc=models.TextField()
     fellowship_date=models.DateField()
 
@@ -110,10 +122,39 @@ class user_fellowship(models.Model):
 class user_career(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='career')
     title=models.CharField(max_length=255,null=True,blank=True)    
-    emp_type=models.CharField(max_length=255,null=True,blank=True)
     company_name=models.CharField(max_length=255,null=True,blank=True)
     location=models.CharField(max_length=100,null=True,blank=True)
+    date=models.DateField(null=True,blank=True)
+    description=models.TextField(null=True,blank=True)
+
+
+class user_social_media(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='socialmedia')
+    plateform=models.CharField(max_length=255)
+    link=models.TextField()
+
+
+class user_industry(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='industry')
+    organisation_name=models.CharField(max_length=100)
+    position=models.CharField(max_length=100)
     start_date=models.DateField(null=True,blank=True)
     end_date=models.DateField(null=True,blank=True)
     is_currently_working=models.BooleanField(default=False)
-    description=models.TextField(null=True,blank=True)
+    remark=models.TextField()
+
+
+class user_certification(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='certification')
+    certification_name=models.CharField(max_length=255,null=True,blank=True)
+    certification_completion_id=models.CharField(max_length=255,null=True,blank=True)
+    certification_url=models.TextField(null=True, blank=True)
+    issue_date=models.CharField(max_length=255,null=True,blank=True)
+    expiry_date=models.CharField(max_length=255,null=True,blank=True)
+
+
+
+class user_preference(models.Model):  
+    user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='preference')
+    prefered_job_type=models.CharField(max_length=255,null=True,blank=True)
+    prefered_job_location=models.CharField(max_length=255,null=True,blank=True)
