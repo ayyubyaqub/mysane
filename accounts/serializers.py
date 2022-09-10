@@ -243,20 +243,18 @@ class user_socialmediaSerializer(serializers.ModelSerializer):
 class user_industrySerializer(serializers.ModelSerializer):
     class Meta:
         model=user_industry
-        fields=['id','user','organisation_name','position','start_date','end_date','is_currently_working','remark']
+        fields=['id','user','organisation_name','position','start_date','remark']
         extra_kwargs = {'id':{'read_only':True}}
 
     def create(self, validated_data):
-        obj=user_industry.objects.create(user=validated_data['user'],organisation_name=validated_data['organisation_name'],position=validated_data['position'],start_date=validated_data['start_date'],end_date=validated_data['end_date'],is_currently_working=validated_data['is_currently_working'],remark=validated_data['remark'])
+        obj=user_industry.objects.create(user=validated_data['user'],organisation_name=validated_data['organisation_name'],position=validated_data['position'],start_date=validated_data['start_date'],remark=validated_data['remark'])
         obj.save()
         return obj
 
     def update(self, instance, validated_data):
         instance.organisation_name=validated_data.get('organisation_name',instance.organisation_name)
         instance.position=validated_data.get('position',instance.position)      
-        instance.start_date=validated_data.get('start_date',instance.start_date)      
-        instance.end_date=validated_data.get('end_date',instance.end_date)      
-        instance.is_currently_working=validated_data.get('is_currently_working',instance.is_currently_working)      
+        instance.start_date=validated_data.get('start_date',instance.start_date)           
         instance.remark=validated_data.get('remark',instance.remark)      
         instance.save()
         return instance 

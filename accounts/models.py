@@ -138,8 +138,6 @@ class user_industry(models.Model):
     organisation_name=models.CharField(max_length=100)
     position=models.CharField(max_length=100)
     start_date=models.DateField(null=True,blank=True)
-    end_date=models.DateField(null=True,blank=True)
-    is_currently_working=models.BooleanField(default=False)
     remark=models.TextField()
 
 
