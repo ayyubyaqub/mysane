@@ -29,7 +29,7 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html')),
     path('home', TemplateView.as_view(template_name='index.html')),
     path('profile', TemplateView.as_view(template_name='index.html')),
-    path('basic-detail', TemplateView.as_view(template_name='index.html')),
+    path('basic-details', TemplateView.as_view(template_name='index.html')),
     path('college-education', TemplateView.as_view(template_name='index.html')),
     path('professional', TemplateView.as_view(template_name='index.html')),
     path('preference', TemplateView.as_view(template_name='index.html')),
@@ -56,5 +56,5 @@ urlpatterns = [
     path('job-preference', TemplateView.as_view(template_name='index.html')),
     path('certification', TemplateView.as_view(template_name='index.html')),
     path('', TemplateView.as_view(template_name='index.html')),
-    
+
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
