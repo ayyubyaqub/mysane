@@ -72,7 +72,6 @@ class College_detail(models.Model):
     city=models.CharField(max_length=100,null=True,blank=True)
   
 
-
 class Skill(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='skill')
     skill=models.CharField(max_length=255,null=True,blank=True)
@@ -151,7 +150,6 @@ class user_certification(models.Model):
     certification_url=models.TextField(null=True, blank=True)
     issue_date=models.CharField(max_length=255,null=True,blank=True)
     expiry_date=models.CharField(max_length=255,null=True,blank=True)
-
 
 
 class user_preference(models.Model):  
