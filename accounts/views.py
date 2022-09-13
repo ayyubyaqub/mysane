@@ -18,12 +18,12 @@ def authenticate(username=None, password=None,):
             (Q(email=username) | Q(phone=username)))
         print(user,18)    
     except User.DoesNotExist:
-        return None
+        return 404
     else:
         if user.check_password(password):
             return user
         else:
-            return None
+            return 401
 
 
 class  RegisterView(APIView):
@@ -73,8 +73,18 @@ class LoginView(APIView):
         username = data.get('username', None)
         password = data.get('login_password', None)
         user = authenticate(username=username, password=password)
-        print(user,76)
-        if user is not None:
+        if user==404:
+            return JsonResponse({
+                    'status':404,
+                    'msg':'User DoesNot Exist'
+                    })  
+        elif(user==401):
+            return JsonResponse({
+                    'status':401,
+                    'msg':'Wrong Password'
+                    })
+
+        elif user is not None:
             if user.is_active:
                 if user.is_phone_varified:
                     login(request, user)
@@ -82,19 +92,19 @@ class LoginView(APIView):
                     return JsonResponse({'status':True,'user_data':userserializer.data})
                 else:
                     return JsonResponse({
-                    'status':False,
+                    'status':405,
                     'msg':'Please varify your phone number'
                     })    
 
             else:
                 return JsonResponse({
-                    'status':False,
-                    'msg':'Invalid crediential'
+                    'status':403,
+                    'msg':'You are blocked by admin'
                 })    
 
         else:
             return JsonResponse({
-                    'status':False,
+                    'status':500,
                     'error':'something went wrong'
                 })  
     
