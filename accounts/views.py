@@ -73,14 +73,19 @@ class LoginView(APIView):
         username = data.get('username', None)
         password = data.get('login_password', None)
         user = authenticate(username=username, password=password)
-        print(user,16)
+        print(user,76)
         if user is not None:
             if user.is_active:
-                login(request, user)
-                userserializer=UserSerializer(user)
-                print(userserializer.data)
+                if user.is_phone_varified:
+                    login(request, user)
+                    userserializer=UserSerializer(user)
+                    return JsonResponse({'status':True,'user_data':userserializer.data})
+                else:
+                    return JsonResponse({
+                    'status':False,
+                    'msg':'Please varify your phone number'
+                    })    
 
-                return JsonResponse({'status':True,'user_data':userserializer.data})
             else:
                 return JsonResponse({
                     'status':False,
@@ -90,7 +95,7 @@ class LoginView(APIView):
         else:
             return JsonResponse({
                     'status':False,
-                    'error':'something went wrong ayyub'
+                    'error':'something went wrong'
                 })  
     
 class VerifyOtp(APIView):

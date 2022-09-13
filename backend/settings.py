@@ -99,11 +99,11 @@ DATABASES = {
         'HOST': 'database-1.cbzl07gxnei8.ap-south-1.rds.amazonaws.com',
         'PORT': '5432',
     
-
+    
     }
 }
 
-
+# please check your ip is registered with rds vpc policy
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

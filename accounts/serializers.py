@@ -3,7 +3,7 @@ from rest_framework import serializers
 from .helpers import send_otp_mobile  
 from .models import *
 
-class   UserSerializer(serializers.ModelSerializer):
+class   UserSerializer(serializers.ModelSerializer):    
     class Meta:
         model=User
         fields=['id','email','password','phone','first_name','last_name','gender','city','marital_status','dob']
