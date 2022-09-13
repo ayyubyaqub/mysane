@@ -93,7 +93,7 @@ class LoginView(APIView):
                 else:
                     return JsonResponse({
                     'status':405,
-                    'msg':'Please varify your phone number'
+                    'msg':'Please verify your phone number'
                     })    
 
             else:
@@ -105,7 +105,7 @@ class LoginView(APIView):
         else:
             return JsonResponse({
                     'status':500,
-                    'error':'something went wrong'
+                    'msg':'something went wrong'
                 })  
     
 class VerifyOtp(APIView):
