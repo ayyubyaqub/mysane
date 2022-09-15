@@ -399,7 +399,7 @@ class skill(APIView):
     def put(self, request, pk, format=None):
         skilldetail = Skill.objects.get(id=pk)
         try:
-            serializer = Education_detailSerializer(skilldetail, data=request.data,partial=True)
+            serializer = SkillSerializer(skilldetail, data=request.data,partial=True)
 
         except Exception as e:  
             print(e)
@@ -484,7 +484,7 @@ class professional_Detail(APIView):
     def put(self, request, pk, format=None):
         prof_detail = professional_detail.objects.get(id=pk)
         try:
-            serializer = Education_detailSerializer(prof_detail, data=request.data,partial=True)
+            serializer = ProfessionalDetailSerializer(prof_detail, data=request.data,partial=True)
 
         except Exception as e:  
             print(e)
@@ -811,14 +811,14 @@ class user_fellowship_view(APIView):
     def put(self, request, pk, format=None):
         obj = user_fellowship.objects.get(id=pk)
         try:
-            serializer = user_volunteershipSerializer(obj, data=request.data,partial=True)
+            serializer = user_fellowshipshipSerializer(obj, data=request.data,partial=True)
 
         except Exception as e:  
             print(e)
             pass
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse({'status':True,'updated_leadership':serializer.data})
+            return JsonResponse({'status':True,'updated_fellowship':serializer.data})
         return JsonResponse({'status':False,'msg':serializer.errors})            
 
 
