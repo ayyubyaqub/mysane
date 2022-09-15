@@ -139,7 +139,7 @@ class VerifyOtp(APIView):
             if not user_obj.exists():
                 return JsonResponse({
                     'status':404,
-                    'error':'something went wrong'
+                    'error':'mobile does not exist'
                 })
 
             status,time=  send_otp_mobile(data.get('phone'),user_obj[0])  
@@ -231,14 +231,14 @@ class educationdetail(APIView):
         educationdetail = Education_detail.objects.get(id=pk)
     
         try:
-            serializer = Education_detailSerializer(educationdetail, data=request.data)
+            serializer = Education_detailSerializer(educationdetail, data=request.data,partial=True)
         except Exception as e:  
             print(e)
             pass
         if serializer.is_valid():
             serializer.save()
             return JsonResponse({'status':True,'user_data':serializer.data})
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return JsonResponse({'status':False,'msg':serializer.errors})  
 
 
 class college_detail_view(APIView):
@@ -316,14 +316,14 @@ class college_detail_view(APIView):
         object = College_detail.objects.get(id=pk)
     
         try:
-            serializer = Education_detailSerializer(object, data=request.data)
+            serializer = Education_detailSerializer(object, data=request.data,partial=True)
         except Exception as e:  
             print(e)
             pass
         if serializer.is_valid():
             serializer.save()
             return JsonResponse({'status':True,'user_data':serializer.data})
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return JsonResponse({'status':False,'msg':serializer.errors})  
 
 
 class skill(APIView):
@@ -399,7 +399,7 @@ class skill(APIView):
     def put(self, request, pk, format=None):
         skilldetail = Skill.objects.get(id=pk)
         try:
-            serializer = Education_detailSerializer(skilldetail, data=request.data)
+            serializer = Education_detailSerializer(skilldetail, data=request.data,partial=True)
 
         except Exception as e:  
             print(e)
@@ -407,7 +407,7 @@ class skill(APIView):
         if serializer.is_valid():
             serializer.save()
             return JsonResponse({'status':True,'updated_skill':serializer.data})
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)         
+        return JsonResponse({'status':False,'msg':serializer.errors})    
 
 
 class professional_Detail(APIView):
@@ -484,7 +484,7 @@ class professional_Detail(APIView):
     def put(self, request, pk, format=None):
         prof_detail = professional_detail.objects.get(id=pk)
         try:
-            serializer = Education_detailSerializer(prof_detail, data=request.data)
+            serializer = Education_detailSerializer(prof_detail, data=request.data,partial=True)
 
         except Exception as e:  
             print(e)
@@ -492,7 +492,7 @@ class professional_Detail(APIView):
         if serializer.is_valid():
             serializer.save()
             return JsonResponse({'status':True,'updated_skill':serializer.data})
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)         
+        return JsonResponse({'status':False,'msg':serializer.errors})     
 
 
 
@@ -566,7 +566,7 @@ class user_project_view(APIView):
     def put(self, request, pk, format=None):
         prof_detail = user_project.objects.get(id=pk)
         try:
-            serializer = User_projectSerializer(prof_detail, data=request.data)
+            serializer = User_projectSerializer(prof_detail, data=request.data,partial=True)
 
         except Exception as e:  
             print(e)
@@ -574,7 +574,7 @@ class user_project_view(APIView):
         if serializer.is_valid():
             serializer.save()
             return JsonResponse({'status':True,'updated_skill':serializer.data})
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)                 
+        return JsonResponse({'status':False,'msg':serializer.errors})               
 
 
 
@@ -649,7 +649,7 @@ class user_leadership_view(APIView):
     def put(self, request, pk, format=None):
         userleadership = user_leadership.objects.get(id=pk)
         try:
-            serializer = User_leadershipSerializer(userleadership, data=request.data)
+            serializer = User_leadershipSerializer(userleadership, data=request.data,partial=True)
 
         except Exception as e:  
             print(e)
@@ -657,7 +657,7 @@ class user_leadership_view(APIView):
         if serializer.is_valid():
             serializer.save()
             return JsonResponse({'status':True,'updated_leadership':serializer.data})
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)                 
+        return JsonResponse({'status':False,'msg':serializer.errors})             
 
 
 class user_volunteership_view(APIView):
@@ -730,7 +730,7 @@ class user_volunteership_view(APIView):
     def put(self, request, pk, format=None):
         uservolunteership = user_volunteership.objects.get(id=pk)
         try:
-            serializer = user_volunteershipSerializer(uservolunteership, data=request.data)
+            serializer = user_volunteershipSerializer(uservolunteership, data=request.data ,partial=True)
 
         except Exception as e:  
             print(e)
@@ -738,7 +738,7 @@ class user_volunteership_view(APIView):
         if serializer.is_valid():
             serializer.save()
             return JsonResponse({'status':True,'updated_leadership':serializer.data})
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)                 
+        return JsonResponse({'status':False,'msg':serializer.errors})                 
 
 
 class user_fellowship_view(APIView):
@@ -811,7 +811,7 @@ class user_fellowship_view(APIView):
     def put(self, request, pk, format=None):
         obj = user_fellowship.objects.get(id=pk)
         try:
-            serializer = user_volunteershipSerializer(obj, data=request.data)
+            serializer = user_volunteershipSerializer(obj, data=request.data,partial=True)
 
         except Exception as e:  
             print(e)
@@ -819,7 +819,7 @@ class user_fellowship_view(APIView):
         if serializer.is_valid():
             serializer.save()
             return JsonResponse({'status':True,'updated_leadership':serializer.data})
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)                 
+        return JsonResponse({'status':False,'msg':serializer.errors})            
 
 
 class user_career_view(APIView):
@@ -894,7 +894,7 @@ class user_career_view(APIView):
     def put(self, request, pk, format=None):
         obj = user_career.objects.get(id=pk)
         try:
-            serializer = CareerSerializer(obj, data=request.data)
+            serializer = CareerSerializer(obj, data=request.data,partial=True)
 
         except Exception as e:  
             print(e)
@@ -902,7 +902,7 @@ class user_career_view(APIView):
         if serializer.is_valid():
             serializer.save()
             return JsonResponse({'status':True,'updated_career':serializer.data})
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)                 
+        return JsonResponse({'status':False,'msg':serializer.errors})                
 
     
 class ChangePassword(APIView):
@@ -1002,7 +1002,7 @@ class user_social_media_view(APIView):
     def put(self, request, pk, format=None):
         obj = user_social_media.objects.get(id=pk)
         try:
-            serializer = user_socialmediaSerializer(obj, data=request.data)
+            serializer = user_socialmediaSerializer(obj, data=request.data,partial=True)
 
         except Exception as e:  
             print(e)
@@ -1010,7 +1010,7 @@ class user_social_media_view(APIView):
         if serializer.is_valid():
             serializer.save()
             return JsonResponse({'status':True,'updated_socialmedia':serializer.data})
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)                 
+        return JsonResponse({'status':False,'msg':serializer.errors})                 
 
 
 class user_industry_view(APIView):
@@ -1083,7 +1083,7 @@ class user_industry_view(APIView):
     def put(self, request, pk, format=None):
         obj = user_industry.objects.get(id=pk)
         try:
-            serializer = user_industrySerializer(obj, data=request.data)
+            serializer = user_industrySerializer(obj, data=request.data,partial=True)
 
         except Exception as e:  
             print(e)
@@ -1091,7 +1091,7 @@ class user_industry_view(APIView):
         if serializer.is_valid():
             serializer.save()
             return JsonResponse({'status':True,'updated_industry':serializer.data})
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)                 
+        return JsonResponse({'status':False,'msg':serializer.errors})     
 
 
 class update_profile_view(APIView):
@@ -1184,15 +1184,15 @@ class user_certification_view(APIView):
     def put(self, request, pk, format=None):
         obj = user_certification.objects.get(id=pk)
         try:
-            serializer = user_certificationSerializer(obj, data=request.data)
+            serializer = user_certificationSerializer(obj, data=request.data,partial=True)
 
         except Exception as e:  
             print(e) 
             pass
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse({'status':True,'updated_industry':serializer.data})
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)                 
+            return JsonResponse({'status':True,'updated_certification':serializer.data})
+        return JsonResponse({'status':False,'msg':serializer.errors})                
 
 
 class user_preference_view(APIView):
@@ -1264,7 +1264,7 @@ class user_preference_view(APIView):
     def put(self, request, pk, format=None):
         obj = user_preference.objects.get(id=pk)
         try:
-            serializer = user_preference_Serializer(obj, data=request.data)
+            serializer = user_preference_Serializer(obj, data=request.data,partial=True)
 
         except Exception as e:  
             print(e) 
@@ -1272,5 +1272,5 @@ class user_preference_view(APIView):
         if serializer.is_valid():
             serializer.save()
             return JsonResponse({'status':True,'updated_industry':serializer.data})
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)                 
+        return JsonResponse({'status':False,'msg':serializer.errors})                
 
