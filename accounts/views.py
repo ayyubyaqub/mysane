@@ -315,8 +315,8 @@ class college_detail_view(APIView):
     def put(self, request, pk, format=None):
         object = College_detail.objects.get(id=pk)
     
-        try:
-            serializer = Education_detailSerializer(object, data=request.data,partial=True)
+        try: 
+            serializer = College_detailSerializer(object, data=request.data,partial=True)
         except Exception as e:  
             print(e)
             pass
