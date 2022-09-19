@@ -161,21 +161,19 @@ class educationdetail(APIView):
         print(pk)
         if pk != None:
             print(pk,306)
-            skills=Education_detail.objects.filter(user__id=pk)
-            skillsdata=Education_detailSerializer(skills,many=True)
+            obj=Education_detail.objects.filter(user__id=pk)
+            obj_data=Education_detailSerializer(obj,many=True)
             return JsonResponse(
                     {
                         'status':200,
-                        'data':skillsdata.data
+                        'data':obj_data.data
                         
                     }
                 )
-        educationdetaildata=Education_detail.objects.all()
-        educationdetaildata=Education_detailSerializer(educationdetaildata,many=True)
         return JsonResponse(
                     {
-                        'status':200,
-                        'data':educationdetaildata.data
+                        'status':404,
+                        'data':'Not Found'
                         
                     }
                 )
@@ -827,7 +825,6 @@ class user_career_view(APIView):
         if pk != None:
             print(pk,737)
             obj=user_career.objects.filter(user__id=pk)
-            print(obj)
             obj_data=CareerSerializer(obj,many=True)
             return JsonResponse(
                     {
@@ -935,7 +932,6 @@ class user_social_media_view(APIView):
         if pk != None:
             print(pk,737)
             obj=user_social_media.objects.filter(user__id=pk)
-            print(obj)
             obj_data=user_socialmediaSerializer(obj,many=True)
             return JsonResponse(
                     {
@@ -1018,7 +1014,6 @@ class user_industry_view(APIView):
         if pk != None:
             print(pk,935)
             obj=user_industry.objects.filter(user__id=pk)
-            print(obj)
             obj_data=user_industrySerializer(obj,many=True)
             return JsonResponse(
                     {
@@ -1274,3 +1269,102 @@ class user_preference_view(APIView):
             return JsonResponse({'status':True,'updated_industry':serializer.data})
         return JsonResponse({'status':False,'msg':serializer.errors})                
 
+
+class professional_summery_view(APIView):
+    def get(self,request,pk=None):
+        if pk != None:
+            obj=Skill.objects.filter(user__id=pk)
+            obj_data=SkillSerializer(obj,many=True)
+            list1=[{'Skill':obj_data.data}]
+            
+            obj=professional_detail.objects.filter(user__id=pk)
+            obj_data=ProfessionalDetailSerializer(obj,many=True)
+            list1.append({'professional_detail':obj_data.data})
+
+
+            obj=user_project.objects.filter(user__id=pk)
+            obj_data=User_projectSerializer(obj,many=True)
+            list1.append({'user_project':obj_data.data})
+
+
+            obj=user_leadership.objects.filter(user__id=pk)
+            obj_data=User_leadershipSerializer(obj,many=True)
+            list1.append({'user_leadership':obj_data.data})
+            
+            obj=user_volunteership.objects.filter(user__id=pk)
+            obj_data=user_volunteershipSerializer(obj,many=True)
+            list1.append({'user_volunteership':obj_data.data})
+
+
+            obj=user_fellowship.objects.filter(user__id=pk)
+            obj_data=user_fellowshipshipSerializer(obj,many=True)
+            list1.append({'user_fellowship':obj_data.data})
+
+
+            obj=user_career.objects.filter(user__id=pk)
+            obj_data=CareerSerializer(obj,many=True)
+            list1.append({'user_career':obj_data.data})
+            
+            obj=user_social_media.objects.filter(user__id=pk)
+            obj_data=user_socialmediaSerializer(obj,many=True)
+            list1.append({'user_social_media':obj_data.data})
+
+
+            obj=user_industry.objects.filter(user__id=pk)
+            obj_data=user_industrySerializer(obj,many=True)
+            list1.append({'user_industry':obj_data.data})
+
+
+            obj=user_certification.objects.filter(user__id=pk)
+            obj_data=user_certificationSerializer(obj,many=True)
+            list1.append({'user_certification':obj_data.data})
+
+
+            obj=user_preference.objects.filter(user__id=pk)
+            obj_data=user_preference_Serializer(obj,many=True)
+            list1.append({'user_preference':obj_data.data})
+
+            return JsonResponse(
+                    {
+                        'status':200,
+                        'data':list1
+                        
+                    }
+                )
+        
+        return JsonResponse(
+                    {
+                        'status':404,
+                        'data':'User Not Exist'
+                        
+                    }
+                )
+
+
+
+class educational_summery_view(APIView):
+    def get(self,request,pk=None):
+        if pk != None:
+            obj=Education_detail.objects.filter(user__id=pk)
+            obj_data=Education_detailSerializer(obj,many=True)
+            list1=[{'School_detail':obj_data.data}]
+
+
+            obj=College_detail.objects.filter(user__id=pk)
+            obj_data=College_detailSerializer(obj,many=True)
+            list1.append({'College_detail':obj_data.data})
+            return JsonResponse(
+                        {
+                            'status':200,
+                            'data':list1
+                            
+                        }
+                    )
+        
+        return JsonResponse(
+                    {
+                        'status':404,
+                        'data':'User Not Exist'
+                        
+                    }
+                )
