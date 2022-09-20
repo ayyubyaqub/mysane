@@ -334,6 +334,7 @@ class skill(APIView):
             return JsonResponse(
                     {
                         'status':200,
+                        
                         'data':skillsdata.data
                         
                     }
