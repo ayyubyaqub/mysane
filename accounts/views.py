@@ -329,7 +329,7 @@ class skill(APIView):
         print(304)
         if pk != None:
             print(pk,306)
-            skills=Skill.objects.filter(user__id=pk)
+            skills=Skill.objects.filter(user__id=pk).order_by('id')
             skillsdata=SkillSerializer(skills,many=True)
             return JsonResponse(
                     {
