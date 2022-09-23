@@ -213,7 +213,7 @@ class CareerSerializer(serializers.ModelSerializer):
         return usercareer
 
     def update(self, instance, validated_data):
-        instance.emp_type=validated_data.get('emp_type',instance.emp_type)
+        instance.title=validated_data.get('title',instance.title)
         instance.company_name=validated_data.get('company_name',instance.company_name)
         instance.location=validated_data.get('location',instance.location)
         instance.date=validated_data.get('date',instance.date)

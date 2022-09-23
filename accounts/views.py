@@ -161,7 +161,7 @@ class educationdetail(APIView):
         print(pk)
         if pk != None:
             print(pk,306)
-            obj=Education_detail.objects.filter(user__id=pk)
+            obj=Education_detail.objects.filter(user__id=pk).order_by('id')
             obj_data=Education_detailSerializer(obj,many=True)
             return JsonResponse(
                     {
@@ -244,7 +244,7 @@ class college_detail_view(APIView):
         print(pk)
         if pk != None:
             print(pk,306)
-            obj=College_detail.objects.filter(user__id=pk)
+            obj=College_detail.objects.filter(user__id=pk).order_by('id')
             print(obj,236)
             objdata=College_detailSerializer(obj,many=True)
             return JsonResponse(
@@ -265,8 +265,6 @@ class college_detail_view(APIView):
 
     def post(self,request):
         data=request.data
-        print(data)
-    
         try:
             serializer=College_detailSerializer(data=data)
             if not serializer.is_valid():
@@ -278,7 +276,7 @@ class college_detail_view(APIView):
                         
                     }
                 )
-            print('OK')
+          
             resp=serializer.save()
             print(resp)
             return JsonResponse(
@@ -288,8 +286,6 @@ class college_detail_view(APIView):
                      }
                 )
         except Exception as e :
-            print(178)
-            print(e,280)    
             return JsonResponse(
                 {
                     'status':404,
@@ -334,7 +330,6 @@ class skill(APIView):
             return JsonResponse(
                     {
                         'status':200,
-                        
                         'data':skillsdata.data
                         
                     }
@@ -414,7 +409,7 @@ class professional_Detail(APIView):
         print(319)
         if pk != None:
             print(pk,321)
-            obj=professional_detail.objects.filter(user__id=pk)
+            obj=professional_detail.objects.filter(user__id=pk).order_by('id')
             objdata=ProfessionalDetailSerializer(obj,many=True)
             return JsonResponse(
                     {
@@ -500,7 +495,7 @@ class user_project_view(APIView):
         print(406)
         if pk != None:
             print(pk,408)
-            userproject=user_project.objects.filter(user__id=pk)
+            userproject=user_project.objects.filter(user__id=pk).order_by('id')
             userprojectdata=User_projectSerializer(userproject,many=True)
             return JsonResponse(
                     {
@@ -582,7 +577,7 @@ class user_leadership_view(APIView):
         print(406)
         if pk != None:
             print(pk,408)
-            userleadership=user_leadership.objects.filter(user__id=pk)
+            userleadership=user_leadership.objects.filter(user__id=pk).order_by('id')
             userleadershipdata=User_leadershipSerializer(userleadership,many=True)
             return JsonResponse(
                     {
@@ -664,7 +659,7 @@ class user_volunteership_view(APIView):
         print(406)
         if pk != None:
             print(pk,408)
-            uservolunteership=user_volunteership.objects.filter(user__id=pk)
+            uservolunteership=user_volunteership.objects.filter(user__id=pk).order_by('id')
             uservolunteershipdata=user_volunteershipSerializer(uservolunteership,many=True)
             return JsonResponse(
                     {
@@ -745,7 +740,7 @@ class user_fellowship_view(APIView):
         print(406)
         if pk != None:
             print(pk,408)
-            userfellowship=user_fellowship.objects.filter(user__id=pk)
+            userfellowship=user_fellowship.objects.filter(user__id=pk).order_by('id')
             userfellowshipdata=user_fellowshipshipSerializer(userfellowship,many=True)
             return JsonResponse(
                     {
@@ -825,7 +820,7 @@ class user_career_view(APIView):
     def get(self,request,pk=None):
         if pk != None:
             print(pk,737)
-            obj=user_career.objects.filter(user__id=pk)
+            obj=user_career.objects.filter(user__id=pk).order_by('id')
             obj_data=CareerSerializer(obj,many=True)
             return JsonResponse(
                     {
@@ -932,7 +927,7 @@ class user_social_media_view(APIView):
     def get(self,request,pk=None):
         if pk != None:
             print(pk,737)
-            obj=user_social_media.objects.filter(user__id=pk)
+            obj=user_social_media.objects.filter(user__id=pk).order_by('id')
             obj_data=user_socialmediaSerializer(obj,many=True)
             return JsonResponse(
                     {
@@ -1014,7 +1009,7 @@ class user_industry_view(APIView):
     def get(self,request,pk=None):
         if pk != None:
             print(pk,935)
-            obj=user_industry.objects.filter(user__id=pk)
+            obj=user_industry.objects.filter(user__id=pk).order_by('id')
             obj_data=user_industrySerializer(obj,many=True)
             return JsonResponse(
                     {
@@ -1114,7 +1109,7 @@ class update_profile_view(APIView):
 class user_certification_view(APIView):
     def get(self,request,pk=None):
         if pk != None:
-            obj=user_certification.objects.filter(user__id=pk)
+            obj=user_certification.objects.filter(user__id=pk).order_by('id')
             print(obj)
             obj_data=user_certificationSerializer(obj,many=True)
             return JsonResponse(
@@ -1194,7 +1189,7 @@ class user_certification_view(APIView):
 class user_preference_view(APIView):
     def get(self,request,pk=None):
         if pk != None:
-            obj=user_preference.objects.filter(user__id=pk)
+            obj=user_preference.objects.filter(user__id=pk).order_by('id')
             print(obj)
             obj_data=user_preference_Serializer(obj,many=True)
             return JsonResponse(
@@ -1274,54 +1269,54 @@ class user_preference_view(APIView):
 class professional_summery_view(APIView):
     def get(self,request,pk=None):
         if pk != None:
-            obj=Skill.objects.filter(user__id=pk)
+            obj=Skill.objects.filter(user__id=pk).order_by('id')
             obj_data=SkillSerializer(obj,many=True)
             list1=[{'Skill':obj_data.data}]
             
-            obj=professional_detail.objects.filter(user__id=pk)
+            obj=professional_detail.objects.filter(user__id=pk).order_by('id')
             obj_data=ProfessionalDetailSerializer(obj,many=True)
             list1.append({'professional_detail':obj_data.data})
 
 
-            obj=user_project.objects.filter(user__id=pk)
+            obj=user_project.objects.filter(user__id=pk).order_by('id')
             obj_data=User_projectSerializer(obj,many=True)
             list1.append({'user_project':obj_data.data})
 
 
-            obj=user_leadership.objects.filter(user__id=pk)
+            obj=user_leadership.objects.filter(user__id=pk).order_by('id')
             obj_data=User_leadershipSerializer(obj,many=True)
             list1.append({'user_leadership':obj_data.data})
             
-            obj=user_volunteership.objects.filter(user__id=pk)
+            obj=user_volunteership.objects.filter(user__id=pk).order_by('id')
             obj_data=user_volunteershipSerializer(obj,many=True)
             list1.append({'user_volunteership':obj_data.data})
 
 
-            obj=user_fellowship.objects.filter(user__id=pk)
+            obj=user_fellowship.objects.filter(user__id=pk).order_by('id')
             obj_data=user_fellowshipshipSerializer(obj,many=True)
             list1.append({'user_fellowship':obj_data.data})
 
 
-            obj=user_career.objects.filter(user__id=pk)
+            obj=user_career.objects.filter(user__id=pk).order_by('id')
             obj_data=CareerSerializer(obj,many=True)
             list1.append({'user_career':obj_data.data})
             
-            obj=user_social_media.objects.filter(user__id=pk)
+            obj=user_social_media.objects.filter(user__id=pk).order_by('id')
             obj_data=user_socialmediaSerializer(obj,many=True)
             list1.append({'user_social_media':obj_data.data})
 
 
-            obj=user_industry.objects.filter(user__id=pk)
+            obj=user_industry.objects.filter(user__id=pk).order_by('id')
             obj_data=user_industrySerializer(obj,many=True)
             list1.append({'user_industry':obj_data.data})
 
 
-            obj=user_certification.objects.filter(user__id=pk)
+            obj=user_certification.objects.filter(user__id=pk).order_by('id')
             obj_data=user_certificationSerializer(obj,many=True)
             list1.append({'user_certification':obj_data.data})
 
 
-            obj=user_preference.objects.filter(user__id=pk)
+            obj=user_preference.objects.filter(user__id=pk).order_by('id')
             obj_data=user_preference_Serializer(obj,many=True)
             list1.append({'user_preference':obj_data.data})
 
@@ -1346,12 +1341,12 @@ class professional_summery_view(APIView):
 class educational_summery_view(APIView):
     def get(self,request,pk=None):
         if pk != None:
-            obj=Education_detail.objects.filter(user__id=pk)
+            obj=Education_detail.objects.filter(user__id=pk).order_by('id')
             obj_data=Education_detailSerializer(obj,many=True)
             list1=[{'School_detail':obj_data.data}]
 
 
-            obj=College_detail.objects.filter(user__id=pk)
+            obj=College_detail.objects.filter(user__id=pk).order_by('id')
             obj_data=College_detailSerializer(obj,many=True)
             list1.append({'College_detail':obj_data.data})
             return JsonResponse(
