@@ -7,18 +7,6 @@ from workspace.models import work_space,work_space_tag
 #         fields='__all__'
 
 
-# class Tags(models.Model):
-#     id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
-#     name = models.CharField(max_length=50, unique=True)
-#     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="created_tags")
-
-# class Posts(models.Model):
-#     id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
-#     name = models.CharField(max_length=50)
-#     caption = models.TextField(max_length=1000)
-#     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
-#     tags = models.ManyToManyField('Tags', related_name='posts')
-
 
 
 
