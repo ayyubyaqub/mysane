@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-gto(ng2vaa_z7en3_%w4c!i5ibzlycp6oim8+)rolj*yjvn14c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*','13.233.84.26','test.saneobserver.ai']
 

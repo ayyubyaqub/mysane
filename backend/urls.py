@@ -26,6 +26,7 @@ urlpatterns = [
     path('accounts/',include('accounts.urls')),
     path('workspace/',include('workspace.urls')),
     path('', TemplateView.as_view(template_name='index.html')),
+    path('profile_summary', TemplateView.as_view(template_name='index.html')),
     path('home', TemplateView.as_view(template_name='index.html')),
     path('profile', TemplateView.as_view(template_name='index.html')),
     path('basic-details', TemplateView.as_view(template_name='index.html')),
