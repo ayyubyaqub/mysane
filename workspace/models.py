@@ -10,7 +10,7 @@ from accounts.models import User
 priority = [
     (1, "High priority"),
     (2, "medium priority"),
-    (3, "medium priority"),
+    (3, "low priority"),
     
 ]
 

@@ -47,10 +47,10 @@ class projectSerializer(serializers.ModelSerializer):
         
 
     def create(self, validated_data):
-        project=project.objects.create(user=validated_data['user'], title=validated_data['title'],
+        Project=project.objects.create(user=validated_data['user'], title=validated_data['title'],
         description=validated_data['description'], project_category=validated_data['project_category'], open_positions=validated_data['open_positions'], start_date=validated_data['start_date'],due_Date=validated_data['due_Date'], estimated_budget=validated_data['estimated_budget'])
-        project.save()
-        return project
+        Project.save()
+        return Project
 
     def update(self, instance, validated_data):
         instance.title=validated_data.get('title',instance.title)
@@ -76,7 +76,7 @@ class taskSerializer(serializers.ModelSerializer):
 
 
     def create(self, validated_data):
-        task=Task.objects.create(user=validated_data['user'], title=validated_data['name'],
+        task=Task.objects.create(user=validated_data['user'], name=validated_data['name'],
         description=validated_data['description'], start_date=validated_data['start_date'],due_Date=validated_data['due_Date'], priority=validated_data['priority'])
         task.save()
         return task

@@ -53,16 +53,16 @@ class project_view(APIView):
         serializer=projectSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse({'status':200,'msg':'workspace created' })
+            return JsonResponse({'status':200,'msg':'project created' })
         print(serializer.errors)    
-        return  JsonResponse({'status':500,'msg':'something went wrong'})   
+        return  JsonResponse({'status':500,'msg':serializer.errors})   
 
     def put(self,request,pk):
         obj=project.objects.get(id=pk)
-        serializer=projectSerializer(obj,partial=True)
+        serializer=projectSerializer(obj,data=request.data,partial=True)
         if serializer.is_valid():
             serializer.save()
-            return ({'status':200,'msg':'workspace updated'})
+            return JsonResponse({'status':200,'msg':'project updated'})
         return JsonResponse({'status':500,'msg':'something went wrong'})    
 
     def delete(self,request,pk):
@@ -87,16 +87,16 @@ class task_view(APIView):
         serializer=taskSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse({'status':200,'msg':'workspace created' })
+            return JsonResponse({'status':200,'msg':'task created' })
         print(serializer.errors)    
-        return  JsonResponse({'status':500,'msg':'something went wrong'})   
+        return  JsonResponse({'status':500,'msg':serializer.errors})   
 
     def put(self,request,pk):
         obj=Task.objects.get(id=pk)
-        serializer=taskSerializer(obj,partial=True)
+        serializer=taskSerializer(obj,data=request.data,partial=True)
         if serializer.is_valid():
             serializer.save()
-            return ({'status':200,'msg':'workspace updated'})
+            return JsonResponse({'status':200,'msg':'task updated'})
         return JsonResponse({'status':500,'msg':'something went wrong'})    
 
     def delete(self,request,pk):
