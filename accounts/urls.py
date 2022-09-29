@@ -8,6 +8,7 @@ from rest_framework.routers import DefaultRouter
 # urlpatterns1 = router.urls
 
 urlpatterns=[
+    path('search/<str:pk>', PurchaseList.as_view()),
     path('register/',RegisterView.as_view()),
     path('verify-otp/',VerifyOtp.as_view()),
     path('Login/',LoginView.as_view()),

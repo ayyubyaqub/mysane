@@ -59,7 +59,11 @@ class Education_detail(models.Model):
     to=models.DateField(null=True, blank=True)
     grades=models.CharField(max_length=100,null=True,blank=True)
     city=models.CharField(max_length=100,null=True,blank=True)
+    def __str__(self):        
+        return str(self.user)+' '+str(self.qualification)
+
   
+
 class College_detail(models.Model):
     user =models.ForeignKey(User,on_delete=models.CASCADE,related_name='college_details',null=True,blank=True)
     college_name=models.CharField(max_length=100,null=True,blank=True)
@@ -70,6 +74,8 @@ class College_detail(models.Model):
     to=models.DateField(null=True, blank=True)
     grades=models.CharField(max_length=100,null=True,blank=True)
     city=models.CharField(max_length=100,null=True,blank=True)
+    def __str__(self):        
+        return str(self.user)+' '+str(self.degree)
   
 
 class Skill(models.Model):
@@ -94,13 +100,11 @@ class user_project(models.Model):
     project_link=models.TextField()
 
 
-
 class user_leadership(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='leadership')
     leadership_title=models.CharField(max_length=255,null=True,blank=True)
     leadership_desc=models.TextField()
     leadership_date=models.DateField()
-
 
 
 class user_volunteership(models.Model):
@@ -109,6 +113,7 @@ class user_volunteership(models.Model):
     organisation_name=models.CharField(max_length=255,null=True,blank=True)
     volunteer_desc=models.TextField()
     volunteer_date=models.DateField()
+
 
 class user_fellowship(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='fellowship')

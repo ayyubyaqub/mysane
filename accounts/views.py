@@ -11,6 +11,8 @@ from .helpers import *
 from django.contrib.auth import login #authenticate
 from rest_framework import status
 from django.db.models import Q
+
+from rest_framework import filters
 from rest_framework import viewsets
 def authenticate(username=None, password=None,):
     try:
@@ -642,6 +644,7 @@ class user_leadership_view(APIView):
 
     def put(self, request, pk, format=None):
         userleadership = user_leadership.objects.get(id=pk)
+        print(request.data,pk)
         try:
             serializer = User_leadershipSerializer(userleadership, data=request.data,partial=True)
 
@@ -1073,6 +1076,7 @@ class user_industry_view(APIView):
 
     def put(self, request, pk, format=None):
         obj = user_industry.objects.get(id=pk)
+        print(request.data)
         try:
             serializer = user_industrySerializer(obj, data=request.data,partial=True)
 
@@ -1337,8 +1341,8 @@ class professional_summery_view(APIView):
                 )
 
 
-
 class educational_summery_view(APIView):
+
     def get(self,request,pk=None):
         if pk != None:
             obj=Education_detail.objects.filter(user__id=pk).order_by('id')
@@ -1364,3 +1368,42 @@ class educational_summery_view(APIView):
                         
                     }
                 )
+
+
+
+class PurchaseList(APIView):
+    
+    def get(self,request,pk):
+        print(pk)
+
+        userlist=User.objects.filter( Q(first_name__icontains=pk)|Q(last_name__icontains=pk)
+        |Q(education_details__school_name__icontains=pk)
+        |Q(education_details__qualification__icontains=pk)
+        |Q(education_details__board__icontains=pk)
+        |Q(education_details__field__icontains=pk)
+        |Q(education_details__city__icontains=pk)
+        |Q(college_details__college_name__icontains=pk)
+        |Q(college_details__degree__icontains=pk)
+        |Q(college_details__university__icontains=pk)
+        |Q(college_details__stream__icontains=pk)
+        |Q(college_details__city__icontains=pk)
+        |Q(skill__skill__icontains=pk)
+        |Q(professionaldetail__company_name__icontains=pk)
+        |Q(professionaldetail__designation__icontains=pk)
+        |Q(professionaldetail__location__icontains=pk)
+        |Q(career__title__icontains=pk)
+        |Q(career__company_name__icontains=pk)
+        |Q(career__location__icontains=pk)
+       
+        ).distinct()
+        print(userlist)
+        userjson=UserSerializer(userlist,many=True)
+        return JsonResponse({'status':200,'search_result':userjson.data})
+
+
+# from rest_framework import generics
+# class ProductList(generics.ListAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer    
+#     filter_backends = [filters.SearchFilter]
+#     filterset_fields = ['first_name', 'last_name']

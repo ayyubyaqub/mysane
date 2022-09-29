@@ -152,9 +152,9 @@ class User_leadershipSerializer(serializers.ModelSerializer):
         return skill
 
     def update(self, instance, validated_data):
-        instance.project_title=validated_data.get('leadership_title',instance.leadership_title)
-        instance.project_desc=validated_data.get('leadership_desc',instance.leadership_desc)
-        instance.project_link=validated_data.get('leadership_date',instance.leadership_date)
+        instance.leadership_title=validated_data.get('leadership_title',instance.leadership_title)
+        instance.leadership_desc=validated_data.get('leadership_desc',instance.leadership_desc)
+        instance.leadership_date=validated_data.get('leadership_date',instance.leadership_date)
         instance.save()
        
         return instance  
