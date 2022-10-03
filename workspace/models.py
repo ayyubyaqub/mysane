@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 from hashlib import blake2b
 from random import choices
 from unicodedata import category
@@ -52,3 +53,6 @@ class Task(models.Model):
     due_Date=models.DateField()
     priority=models.IntegerField(choices=priority,null=True,blank=True)
 
+
+class resume(models.Model):
+    resume=models.FileField(upload_to='resume')

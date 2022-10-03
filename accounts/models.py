@@ -10,7 +10,11 @@ import uuid
 from django.conf import settings
 
 
+
+
 class User(AbstractUser):
+    def filepath(instance,filename):
+        return '/'.join(['user_media',str(instance.phone),'profile_image',filename])
     username=None
     first_name=models.CharField(max_length=50, null=True,blank=True)
     last_name=models.CharField(max_length=50, null  =True,blank=True)
@@ -26,6 +30,7 @@ class User(AbstractUser):
     email_varification_token=models.CharField(max_length=200,null=True,blank=True)
     forget_password_token=models.CharField(max_length=100,null=True,blank=True)
     last_login=models.DateTimeField(null=True,blank=True)
+    profile_image=models.ImageField(upload_to=filepath ,null=True,blank=True )
 
     objects=UserManager()
 

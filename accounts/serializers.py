@@ -6,7 +6,7 @@ from .models import *
 class   UserSerializer(serializers.ModelSerializer):    
     class Meta:
         model=User
-        fields=['id','email','password','phone','first_name','last_name','gender','city','marital_status','dob']
+        fields=['id','email','password','phone','first_name','last_name','gender','city','marital_status','dob','profile_image']
         extra_kwargs = {'password': {'write_only': True},'id':{'read_only':True}}
     def create(self, validated_data):
         user=User.objects.create(email=validated_data['email'], phone=validated_data['phone'],first_name=validated_data['first_name'], last_name=validated_data['last_name'], gender=validated_data['gender'],dob=validated_data['dob'])
@@ -14,15 +14,16 @@ class   UserSerializer(serializers.ModelSerializer):
         user.save()
         send_otp_mobile(user.phone,user)
         return user
-    def update(self, instance, validated_data):
-        instance.first_name=validated_data.get('first_name',instance.first_name)
-        instance.last_name=validated_data.get('last_name',instance.last_name)
-        instance.gender=validated_data.get('gender',instance.gender)
-        instance.city=validated_data.get('city',instance.city)
-        instance.marital_status=validated_data.get('marital_status',instance.marital_status)
-        instance.dob=validated_data.get('dob',instance.dob)
-        instance.save()
-        return instance  
+    # def update(self, instance, validated_data):
+    #     instance.profile_image=validated_data.get('profile_image',instance.profile_image)
+    #     instance.first_name=validated_data.get('first_name',instance.first_name)
+    #     instance.last_name=validated_data.get('last_name',instance.last_name)
+    #     instance.gender=validated_data.get('gender',instance.gender)
+    #     instance.city=validated_data.get('city',instance.city)
+    #     instance.marital_status=validated_data.get('marital_status',instance.marital_status)
+    #     instance.dob=validated_data.get('dob',instance.dob)
+    #     instance.save()
+    #     return instance  
 
 
 class Education_detailSerializer(serializers.ModelSerializer):

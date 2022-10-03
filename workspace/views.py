@@ -3,7 +3,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from django.http import JsonResponse
 from workspace.models import work_space,project,Task
-from workspace.serializers import work_spaceSerializer,projectSerializer,taskSerializer
+from workspace.serializers import work_spaceSerializer,projectSerializer,taskSerializer,resumeSerializer
 # Create your views here.
 class Work_space_view(APIView):
     def get(self,request,pk=None):
@@ -103,3 +103,17 @@ class task_view(APIView):
         obj=Task.objects.get(id=pk)
         obj.delete()
         return JsonResponse({'status':200,'msg':'deleted'}) 
+
+
+
+
+class resume_view(APIView):
+    def post(self,request):
+        print(request.data)
+        print('pk')
+        serializer=resumeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse({'status':200,'msg':'image uploaded' })
+        print(serializer.errors)    
+        return  JsonResponse({'status':500,'msg':serializer.errors})   

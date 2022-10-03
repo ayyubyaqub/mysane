@@ -157,6 +157,9 @@ STATICFILES_DIRS = [
 
 
 
+
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -166,8 +169,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # ================================================================
 
-AWS_ACCESS_KEY_ID = 'AKIAV7WPUE5IJU7OE5OZ'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = 'AKIAV7WPUE5IDHONRWHG'
+AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'sanes3bucket'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
@@ -192,7 +195,7 @@ EMAIL_USE_SSL = False
 
 
 # testing
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 #final test
 
