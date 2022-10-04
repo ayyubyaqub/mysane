@@ -54,5 +54,3 @@ class Task(models.Model):
     priority=models.IntegerField(choices=priority,null=True,blank=True)
 
 
-class resume(models.Model):
-    resume=models.FileField(upload_to='resume')

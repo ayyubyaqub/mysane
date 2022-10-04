@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from workspace.models import work_space,work_space_tag,project,Task,resume
+from workspace.models import work_space,work_space_tag,project,Task
 
 # class work_spaceSerializer(serializers.ModelSerializer):
 #     class Meta:
@@ -93,10 +93,6 @@ class taskSerializer(serializers.ModelSerializer):
 
 
 
-class resumeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model=resume
-        fields='__all__'
 
         
 

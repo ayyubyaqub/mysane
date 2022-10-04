@@ -12,6 +12,5 @@ urlpatterns=[
     path('project/<int:pk>',project_view.as_view()),
     path('task/',task_view.as_view()),
     path('task/<int:pk>',task_view.as_view()),
-    path('resume/',resume_view.as_view()),
 
 ]

@@ -42,5 +42,6 @@ urlpatterns=[
     path('user_preference/<int:pk>',user_preference_view.as_view()),
     path('professional_summery/<int:pk>',professional_summery_view.as_view()),
     path('educational_summery/<int:pk>',educational_summery_view.as_view()),
+    path('resume/<int:pk>',resume_view.as_view()),
 
 ]

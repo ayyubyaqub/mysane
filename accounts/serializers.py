@@ -293,3 +293,17 @@ class user_preference_Serializer(serializers.ModelSerializer):
        )
         obj.save()
         return obj        
+
+
+
+class resumeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=resume
+        fields=['id','user','resume']
+        extra_kwargs = {'id':{'read_only':True}}    
+          
+    def create(self, validated_data):
+        Resume, created = resume.objects.get_or_create(user=validated_data['user'])
+        Resume.resume=validated_data['resume']
+        Resume.save()
+        return Resume

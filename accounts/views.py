@@ -1407,3 +1407,25 @@ class PurchaseList(APIView):
 #     serializer_class = UserSerializer    
 #     filter_backends = [filters.SearchFilter]
 #     filterset_fields = ['first_name', 'last_name']
+
+
+class resume_view(APIView):
+    def get(self,request,pk):
+        obj=resume.objects.get(user=pk)
+        serializer=resumeSerializer(obj)
+        return JsonResponse({'status':200,'data':serializer.data })
+
+    def post(self,request,pk):
+        request.data['user']=pk
+        serializer=resumeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse({'status':200,'msg':'resume uploaded' })
+        print(serializer.errors)    
+        return  JsonResponse({'status':500,'msg':serializer.errors})   
+
+
+
+
+
+        

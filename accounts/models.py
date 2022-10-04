@@ -164,3 +164,14 @@ class user_preference(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='preference')
     prefered_job_type=models.CharField(max_length=255,null=True,blank=True)
     prefered_job_location=models.CharField(max_length=255,null=True,blank=True)
+
+
+
+class resume(models.Model):
+    def filepath(instance,filename):
+        return '/'.join(['user_media',str(instance.user.phone),'resume',filename])
+    user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='resume')
+    resume=models.FileField(upload_to=filepath ,null=True,blank=True )
+
+    def __str__(self) :
+        return str(self.user.email)
