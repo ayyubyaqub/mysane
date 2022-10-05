@@ -1412,7 +1412,7 @@ class PurchaseList(APIView):
 class resume_view(APIView):
     def get(self,request,pk):
         obj=resume.objects.filter(user=pk)
-        serializer=resumeSerializer(obj)
+        serializer=resumeSerializer(obj,many=True)
         return JsonResponse({'status':200,'data':serializer.data })
 
     def post(self,request,pk):
