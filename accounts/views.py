@@ -1097,15 +1097,15 @@ class update_profile_view(APIView):
             print(request.data)
             print(request.method)
             serializer = UserSerializer(user, data=request.data,partial=True)
-            print(serializer)
+        
             if serializer.is_valid():
-                print(1025)
                 serializer.save()
+                print(serializer.data)
                 return JsonResponse({'status':True,'user_data':serializer.data})
             print(serializer.errors)    
         except Exception as e:  
             print(e)
-            return Response({'status':False,'error':str(e)})
+            return JsonResponse({'status':False,'error':str(e)})
         
         return JsonResponse({'error':serializer.errors, 'status':False})
 
@@ -1368,7 +1368,6 @@ class educational_summery_view(APIView):
                         
                     }
                 )
-
 
 
 class PurchaseList(APIView):
